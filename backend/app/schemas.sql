@@ -1,0 +1,60 @@
+-- USERS TABLE
+CREATE TABLE users (
+    User_Id VARCHAR(250) PRIMARY KEY,
+    Name VARCHAR(250) NOT NULL,
+    TYPE ENUM('code', 'phone_number') NOT NULL,
+    Number VARCHAR(20) NOT NULL
+);
+
+-- AGENT TABLE
+CREATE TABLE Agent (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    Agent_Id VARCHAR(250) NOT NULL,
+    Amount INT NOT NULL,
+    Date DATETIME NOT NULL,
+    Fee INT NOT NULL,
+    FOREIGN KEY (Agent_Id) REFERENCES users(User_Id)
+);
+
+-- MOMO_DEBIT TABLE
+CREATE TABLE Momo_Debit (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    UserId VARCHAR(250) NOT NULL,
+    Amount INT NOT NULL,
+    Date DATETIME NOT NULL,
+    Fee INT NOT NULL,
+    FOREIGN KEY (UserId) REFERENCES users(User_Id)
+);
+
+-- MOMO_CREDIT TABLE
+CREATE TABLE Momo_Credit (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    Name VARCHAR(250) NOT NULL,
+    Amount INT NOT NULL,
+    Date DATETIME NOT NULL
+);
+
+-- BANK_DEPOSIT TABLE
+CREATE TABLE Bank_Deposit (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    Amount INT NOT NULL,
+    Date DATETIME NOT NULL
+);
+
+-- UTILITIES TABLE
+CREATE TABLE Utilities (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    Name VARCHAR(250) NOT NULL,
+    Amount INT NOT NULL,
+    Fee INT NOT NULL,
+    Date DATETIME NOT NULL
+);
+
+-- MTN_BUNDLE TABLE
+CREATE TABLE MTN_Bundle (
+    Transaction_Id VARCHAR(250) PRIMARY KEY,
+    Type ENUM('AIRTIME', 'DATA') NOT NULL,
+    Amount INT NOT NULL,
+    Fee INT NOT NULL,
+    Date DATETIME NOT NULL
+);
