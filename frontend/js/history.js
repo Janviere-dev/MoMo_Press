@@ -21,6 +21,7 @@
 /**
  Returns HTML for an icon inside a colored circular background for transaction item
  based on amount
+
  @param {string} iconName - FontAwesome icon class (excluding 'fa-solid')
  @param {number} amount - transaction amount to determine +ve/-ve styling
  @returns {string} - HTML string for the icon element
@@ -33,6 +34,7 @@ function getIconHTML(iconName, amount) {
 /**
  Renders the transaction history list filtering by search text and optional start/end dates,
  and updates totals for received and sent amounts
+
  @param {string} filter - text filter for transaction name/phone/category
  @param {Date|null} startDate - start date for filtering transactions
  @param {Date|null} endDate - end date for filtering transactions
@@ -129,6 +131,30 @@ spendingToggle.addEventListener("change", updateSpendingVisibility);
 // updateSpendingVisibility();
 updateSpendingVisibility(); // initial state
 
+// dark mode toggle logic
+const themeToggle = document.getElementById('theme-toggle');
+
+// apply saved theme preference on load
+if (localStorage.getItem('theme') === 'dark') {
+    document.body.classList.add('dark-mode');
+    themeToggle.checked = true;
+} else if (!localStorage.getItem('theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    // apply system preference if no theme saved
+    document.body.classList.add('dark-mode');
+    themeToggle.checked = true;
+}
+
+// handle toggle change event
+themeToggle.addEventListener('change', () => {
+    if (themeToggle.checked) {
+        document.body.classList.add('dark-mode');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        document.body.classList.remove('dark-mode');
+        localStorage.setItem('theme', 'light');
+    }
+});
+
 // log out
 logoutBtn.addEventListener("click", function () {
     // sessionStorage.clear(); localStorage.clear(); // (simulate session end)
@@ -155,7 +181,7 @@ document.querySelectorAll(".bottom-nav-link").forEach((link) => {
 /* attach download transaction statement functionality */
 document.getElementById("download-btn").addEventListener("click", downloadStatement);
 
-/* generate and download transaction statement as HTML file styled similarly to app branding */
+/* generate and download transaction statement as an HTML file styled similarly to app branding */
 function downloadStatement() {
     const statementRows = transactionsDB
         .map(

@@ -2,6 +2,7 @@
 MoMo Press Transaction History Page Styling
 
 Includes:
+    - light/dark theme
     - layout
     - header
     - screen indicator
@@ -18,7 +19,7 @@ body, html {
     margin: 0;
     padding: 0;
     /*background: #f3f4f6;*/
-    background: #fff;
+    background: #fffbea;
     font-family: 'Segoe UI', Arial, sans-serif;
     overflow-x: hidden;
     min-height: 50vh;
@@ -46,7 +47,7 @@ body, html {
     min-height: 95vh;
     overflow: hidden;
     position: relative;
-    /*padding-bottom: 40px;*/
+    padding-bottom: 30px;
 }
 
 /* header with MTN brand and settings */
@@ -521,5 +522,222 @@ input:checked + .slider:before { transform: translateX(20px);}
 .about-desc { color: #cb9b10; font-size: 12px;}
 @media (max-width: 900px) {
     .settings-modal { width: 98vw; left: 0; right: unset; max-width: unset;}
+}
+
+
+/* Dark Theme */
+/* dark mode styles */
+body.dark-mode {
+    background: #2a3447;
+    color: #e0e0e0;
+}
+
+/* main app container styling */
+body.dark-mode .app-container {
+    background: #0f1624;
+    /*background: #141c2b;*/
+    /*background: #151e2d;*/
+    box-shadow: 0 6px 32px rgb(20, 20, 20);
+}
+
+/* header styling */
+body.dark-mode .top-header {
+    background: linear-gradient(90deg, #fad02e 80%, #fbbf24 100%);
+    color: #1f2937;
+}
+
+/* brand label inside header */
+body.dark-mode .brand-label {
+    background-color: #1f1f1f;
+    color: #fbbf24;
+    box-shadow: 0 3px 7px #fbbf2480;
+}
+
+/* settings button styling */
+body.dark-mode .settings-btn {
+    background: #fbbf24;
+    color: #1f2937;
+}
+
+/* page section backgrounds */
+body.dark-mode .title-row,
+body.dark-mode .searchbar-wrap,
+body.dark-mode .summary-row,
+body.dark-mode .transactions-list,
+body.dark-mode .bottom-nav,
+body.dark-mode .settings-modal {
+    background-color: #0f1624;
+    color: #ddd;
+}
+
+/* active screen indicator */
+body.dark-mode .screen-indicator.active {
+    color: #fffbea;
+}
+
+/* subtitle text below header */
+body.dark-mode .sub-title-text {
+    color: #aaa;
+}
+
+/* download button */
+body.dark-mode .download-btn {
+    color: #aaa;
+    border-color: #aaa;
+}
+body.dark-mode .download-btn i {
+    color: #aaa;
+}
+body.dark-mode .download-btn:hover {
+    color: #fbbf24;
+    border-color: #fbbf24;
+}
+body.dark-mode .download-btn:hover i {
+    color: #fbbf24;
+}
+
+/* search bar */
+body.dark-mode .searchbar {
+    background: #2a3447;
+    border-color: #555;
+    color: #eee;
+}
+body.dark-mode .searchbar:focus {
+    background: #444;
+    border-color: #555;
+}
+
+/* summary cards */
+body.dark-mode .summary-card {
+    background: #212938;
+    box-shadow: 0 8px 10px -5px #000000bb;
+    color: #fffbea;
+}
+
+/* transaction cards */
+body.dark-mode .transaction-card {
+    background: #212938;
+    border-bottom: 1px solid #444;
+    color: #eee;
+    box-shadow: 0 2px 10px #0008;
+}
+
+/* transaction title */
+body.dark-mode .card-title {
+    color: #fffbea;
+}
+
+/* phone number text */
+body.dark-mode .card-phone {
+    color: #aaa;
+}
+
+/* transaction date */
+body.dark-mode .transaction-date {
+    color: #aaa;
+}
+
+/* +ve and -ve amounts */
+body.dark-mode .amount-pos {
+    color: #4ade80;
+}
+body.dark-mode .amount-neg {
+    color: #f87171;
+}
+
+/* transaction icons */
+body.dark-mode .icon-circle.positive {
+    background-color: #bbf7d0;
+    color: #059669;
+    box-shadow: 0 0 6px #bbf7d0aa;
+}
+body.dark-mode .icon-circle.negative {
+    background-color: #fecaca;
+    color: #b91c1c;
+    box-shadow: 0 0 6px #fecacaaa;
+}
+
+/* category badge */
+body.dark-mode .category-badge {
+    background-color: transparent;
+    border: 1.5px solid #c7b891;
+    color: #f7de9e;
+    padding: 2px 8px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 55px;
+    text-align: center;
+}
+
+/* status badge */
+body.dark-mode .status {
+    background-color: transparent;
+    border: 1.5px solid #bbf7d0aa;
+    color: #bbf7d0;
+    padding: 2px 8px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 600;
+    display: inline-block;
+    min-width: 55px;
+    text-align: center;
+}
+
+/* scrollbar styling for .transactions-list */
+body.dark-mode .transactions-list::-webkit-scrollbar {
+    width: 8px;
+    background-color: #0f1624;
+}
+body.dark-mode .transactions-list::-webkit-scrollbar-thumb {
+    background-color: #444b67;
+    border-radius: 4px;
+}
+body.dark-mode .transactions-list {
+    scrollbar-width: thin;
+    scrollbar-color: #444b67 #0f1624;
+}
+
+/* bottom navigation bar */
+body.dark-mode .bottom-nav {
+    background: #141c2b;
+    color: #aaa;
+}
+body.dark-mode .bottom-nav-link.inactive {
+    color: #666;
+}
+body.dark-mode .bottom-nav a.active,
+body.dark-mode .bottom-nav a.active-nav {
+    color: #fbbf24;
+    font-weight: 600;
+}
+
+/* settings modal */
+body.dark-mode .settings-modal {
+    background: #0f1624;
+    color: #aaa;
+    box-shadow: -6px 0 26px #000a;
+}
+body.dark-mode .settings-header {
+    border-bottom: 1px solid #FBBF248C;
+    color: #FBBF248C;
+}
+body.dark-mode .close-settings-btn {
+    color: #FBBF248C;
+}
+
+/* logout button */
+body.dark-mode .logout-btn {
+    background: #6C1313FF;
+    color: #fee2e2;
+}
+body.dark-mode .logout-btn:hover {
+    background: #b91c1c;
+}
+
+/* feature description text */
+body.dark-mode .feature-description {
+    color: #aaa;
 }
 
