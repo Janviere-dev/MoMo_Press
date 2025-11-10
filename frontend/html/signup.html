@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/signup.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <title>MoMo Press - Sign Up</title>
+</head>
+<body>
+    <div class="app-container">
+        <div class="auth-container">
+            <div class="logo-section">
+                <div class="logo-circle">
+                    <span class="logo-text">MoMo </span>
+                     <span class="logo-text2">&nbsp&nbspPress</span>
+                </div>
+                <h1 class="welcome-title">Create Account</h1>
+                <p class="welcome-subtitle">Sign up to start managing your finances</p>
+            </div>
+
+            <form id="signupForm">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <input 
+                        type="text" 
+                        class="form-input" 
+                        id="fullName" 
+                        placeholder="John Doe"
+                    >
+                    <div class="error-message" id="fullNameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input 
+                        type="text" 
+                        class="form-input" 
+                        id="phone" 
+                        placeholder="+250 78X XXX XXX"
+                    >
+                    <div class="error-message" id="phoneError"></div>
+                    <div class="success-message" id="phoneSuccess">Valid phone number</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="password" 
+                            placeholder="At least 6 characters"
+                        >
+                        <button type="button" class="password-toggle" id="togglePassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="passwordStrength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <div class="strength-text" id="strengthText"></div>
+                    </div>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="confirmPassword" 
+                            placeholder="Re-enter your password"
+                        >
+                        <button type="button" class="password-toggle" id="toggleConfirmPassword">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                    <div class="error-message" id="confirmPasswordError"></div>
+                    <div class="success-message" id="confirmPasswordSuccess">Passwords match</div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Sign Up
+                </button>
+
+                <div class="signin-link">
+                    Already have an account? <a href="login.html">Sign In</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="../js/signup.js"></script>
+
+</body>
+</html>
