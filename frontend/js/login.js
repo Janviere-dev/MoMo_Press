@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (isValid) {
             const normalizedPhone = normalizePhone(identifierInput.value);
             
-            // Get users from localStorage
+            // Get users from localStorage(db)
             const users = JSON.parse(localStorage.getItem('momopress_users') || '[]');
             const user = users.find(u => u.phone === normalizedPhone);
 
@@ -117,9 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show success and redirect
             alert('Login successful!');
             
-            // Redirect to dashboard (you can change this to your dashboard page)
-            // For now, just showing success
-            window.location.href = '../html/home.html'; // Change this to your actual dashboard page
+            // Redirect to personalized page
+            window.location.href = '../html/personalize.html';
         }
     });
 });
