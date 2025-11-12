@@ -95,7 +95,7 @@ themeToggle.addEventListener('change', () => {
 // log out
 logoutBtn.addEventListener("click", function () {
     // sessionStorage.clear(); localStorage.clear(); // (simulate session end)
-    window.location.href = "login.html";
+    window.location.href = "html/login.html";
 });
 
 // Tab switch function
