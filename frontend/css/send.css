@@ -34,26 +34,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
-    border-radius: 28px 28px 0 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    /*padding: 16px 20px;*/
+    padding: 1px 18px; /*New Change*/
+    /*border-radius: 28px 28px 0 0;*/
+    border-radius: 22px 22px 0 0; /*New Change*/
+    /*position: sticky;*/ /*New Change*/
+    /*top: 0;*/ /*New Change*/
+    /*z-index: 100;*/ /*New Change*/
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);*/ /*New Change*/
 }
 
 .mtn-badge {
-    background: #000;
-    color: #FFC107;
-    padding: 8px 24px;
+    /*background: #000;*/
+    background: #1f1f1f; /*New Change*/
+    /*color: #FFC107;*/
+    color: #fad02e; /*New Change*/
+    /*padding: 8px 24px;*/
+    padding: 1px 15px; /*New Change*/
     border-radius: 20px;
-    font-weight: 600;
-    font-size: 14px;
+    /*font-weight: 600;*/
+    font-weight: 900; /*New Change*/
+    /*font-size: 14px;*/
+    font-size: 12px; /*New Change*/
+    box-shadow: 0 3px 7px #ffc02d80; /*New Change*/
+    user-select: none; /*New Change*/
 }
 
 .settings-icon {
-    width: 24px;
-    height: 24px;
+    /*width: 24px;*/
+    width: 20px; /*New Change*/
+    /*height: 24px;*/
+    height: 30px; /*New Change*/
     cursor: pointer;
     stroke: #1f2937;
 }
@@ -748,18 +759,18 @@ input:checked + .slider:before {
     body {
         padding: 0;
     }
-    
+
     .app-container {
         margin: 0;
         border-radius: 0;
         height: 100vh;
         max-height: 100vh;
     }
-    
+
     .header {
         border-radius: 0;
     }
-    
+
     .bottom-nav {
         border-radius: 0;
     }
@@ -770,27 +781,238 @@ input:checked + .slider:before {
         grid-template-columns: repeat(3, 1fr);
         gap: 8px;
     }
-    
+
     .amount-btn {
         padding: 10px;
         font-size: 13px;
     }
-    
+
     .modal-content {
         width: 95%;
     }
-    
+
     .app-container {
         border-radius: 0;
         height: 100vh;
         max-height: 100vh;
     }
-    
+
     .header {
         border-radius: 0;
     }
-    
+
     .bottom-nav {
         border-radius: 0;
     }
+}
+
+/* Dark Mode Settings for Send Screen */
+
+/* Base dark mode styles */
+body.dark-mode {
+    background: #2a3447; /* dark base background */
+    color: #e0e0e0; /* lighter text */
+}
+
+/* App container in dark mode */
+body.dark-mode .app-container {
+    background: #0f1624;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.85), 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Header */
+body.dark-mode .header {
+    background: linear-gradient(90deg, #fad02e 80%, #fbbf24 100%);
+    color: #1f2937;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Brand Badge */
+body.dark-mode .mtn-badge {
+    background: #1f1f1f;
+    color: #facc15;
+    box-shadow: 0 0 12px #facc15aa;
+}
+
+/* Settings Icon with dark shade of blue */
+body.dark-mode .settings-icon {
+    stroke: #0F2D57;
+    filter: drop-shadow(0 0 2px #0F2D57);
+    position: relative;
+    z-index: 1101;
+    background-color: rgba(15, 45, 87, 0.12);
+    border-radius: 4px;
+    padding: 2px;
+}
+
+/* Container for form and content */
+body.dark-mode .container {
+    background: #0f1624;
+    color: #ddd;
+    scrollbar-color: #444b67 #0f1624;
+}
+
+body.dark-mode .container::-webkit-scrollbar-thumb {
+    background-color: #444b67;
+}
+
+/* Send form and inputs */
+body.dark-mode .send-form {
+    background: #212938;
+    box-shadow: 0 2px 8px #000a;
+    color: #eee;
+}
+
+body.dark-mode .form-group label {
+    color: #ccc;
+}
+
+body.dark-mode .form-group input {
+    background: #2a3447;
+    border: 1px solid #555;
+    color: #eee;
+}
+
+body.dark-mode .form-group input:focus {
+    background: #444;
+    border-color: #fbbf24;
+    color: #fff;
+}
+
+/* Tab buttons */
+body.dark-mode .tab-btn {
+    background: #2a3447;
+    color: #aaa;
+    border: 1px solid #444;
+}
+
+body.dark-mode .tab-btn.active {
+    background: #fbbf24;
+    color: #111;
+}
+
+/* Amount buttons */
+body.dark-mode .amount-btn {
+    background: #2a3447;
+    border: 1px solid #444;
+    color: #ddd;
+}
+
+body.dark-mode .amount-btn:hover {
+    background: #fbbf24;
+    border-color: #fbbf24;
+    color: #111;
+}
+
+/* Send button */
+body.dark-mode .send-btn {
+    background: #fbbf24;
+    color: #111;
+}
+
+body.dark-mode .send-btn:hover {
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.7);
+}
+
+/* Recent section */
+body.dark-mode .recent-section {
+    background: #212938;
+    box-shadow: 0 2px 8px #000a;
+    color: #ddd;
+}
+
+body.dark-mode .recent-item {
+    background: #2a3447;
+    color: #ccc;
+}
+
+body.dark-mode .recent-item:hover {
+    background: #fbbf24;
+    color: #111;
+}
+
+body.dark-mode h2 {
+    color: #ffffff;
+}
+
+/* Contact badge */
+body.dark-mode .contact-badge {
+    background: #424a67;
+    border: 1px solid #fbbf24;
+    color: #fbbf24;
+}
+
+/* Settings modal panel */
+body.dark-mode .settings-modal {
+    background: #0f1624;
+    color: #aaa;
+    box-shadow: -6px 0 26px #000a;
+    border-radius: 22px 0 0 22px;
+}
+
+body.dark-mode .settings-icon {
+    stroke: #0F2D57;
+    background-color: transparent !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    position: relative;
+    z-index: 1101;
+}
+
+/* Settings header */
+body.dark-mode .settings-header {
+    border-bottom: 1px solid #FBBF248C;
+    color: #FBBF248C;
+}
+
+/* Close settings button */
+body.dark-mode .close-settings-btn {
+    color: #FBBF248C;
+    background: none;
+}
+
+/* Feature description text */
+body.dark-mode .feature-description {
+    color: #aaa;
+}
+
+/* Toggle slider */
+body.dark-mode .slider {
+    background-color: #444;
+}
+
+body.dark-mode input:checked + .slider {
+    background-color: #fbbf24;
+}
+
+body.dark-mode .logout-btn {
+    background: #6C1313FF;
+    color: #fee2e2;
+}
+
+body.dark-mode .logout-btn:hover {
+    background: #b91c1c;
+}
+
+body.dark-mode .bottom-nav {
+    background: #141c2b;
+    color: #aaa;
+    box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.6);
+}
+
+body.dark-mode .bottom-nav a {
+    color: #666;
+    transition: color 0.2s;
+}
+
+body.dark-mode .bottom-nav a:hover {
+    color: #fbbf24;
+}
+
+body.dark-mode .bottom-nav a.active,
+body.dark-mode .bottom-nav a.active-nav {
+    color: #fbbf24;
+    font-weight: 600;
+    cursor: default;
 }
