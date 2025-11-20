@@ -36,38 +36,20 @@ The mobile app serves as the main user interface and processing point for transa
 
 #### **Local Logic**
 
-* Users can add descriptions or notes to transactions (local-only).
 * Spending limits and thresholds trigger alerts or inquiries.
-* Users can export their transaction data as CSV/JSON files.
-
----
-
-### **B. Backend Services (Optional Cloud Layer)**
-
-The backend provides cloud-based analytics, synchronization, and reporting features. It is optional and used mainly for users who enable backup or data sync.
 
 #### **Core Services**
-
-* **API Gateway / Auth Service:**
-  Manages authentication (e.g., JWT/OAuth2) and secures communication with the app.
 
 * **Transaction Sync Service:**
   Receives and stores parsed transactions sent from the mobile app.
 
 * **Data Enrichment & Aggregation Service:**
-  Computes weekly averages, monthly totals, and spending trends.
+  Computes weekly totals, monthly totals, and spending insights.
 
 * **Business Rules Engine:**
   Runs rules to detect when:
 
   * Monthly spending limit is exceeded → sends **Alert SMS**
-  * Transaction exceeds average spending → sends **Inquiry SMS**
-
-* **Notification Service:**
-  Sends push notifications or device-based SMS alerts to users.
-
-* **Export Service:**
-  Generates downloadable reports in CSV/JSON formats.
 
 * **Scheduler / Cron Jobs:**
   Automates weekly and monthly data calculations.
@@ -83,7 +65,6 @@ These databases manage user data, transaction history, and analytics.
 | **Transactions Database**  | Stores structured transaction data (type, amount, time, counterparty, etc.) |
 | **User Settings Database** | Stores user preferences, spending limits, and alert configurations          |
 | **Analytics Database**     | Contains aggregated insights (weekly averages, monthly summaries)           |
-| **Logs / Audit Store**     | Maintains logs for sync activities and alert history                        |
 
 ---
 
@@ -100,74 +81,31 @@ These databases manage user data, transaction history, and analytics.
 
 4. **Analysis & Alerts:**
 
-   * The app calculates weekly averages.
-   * If a transaction exceeds limits, an **alert/inquiry** SMS is sent automatically.
+   * The app calculates monthly spending and compares to limits set.
+   * If a transaction exceeds limits, an **alert** is raised automatically.
 
 5. **USSD Payment:**
    The user inputs a code, and the app composes a USSD command to complete the payment using the phone dialer.
-
-6. **Optional Cloud Sync:**
-   Users who enable sync send data to the backend for backup and advanced analytics.
-
-7. **Export Reports:**
-   Users can generate and download spending reports directly from the app.
 
 ---
 
 ## **4. Key Advantages**
 
 * **Offline-first Design:** Works without constant internet access.
-* **Privacy-friendly:** All sensitive data remains on the device unless sync is enabled.
-* **Automated Alerts:** Real-time SMS notifications for unusual or high spending.
-* **Simple Payments:** Direct USSD integration with no telecom API dependency.
-* **Analytics-ready:** Optional backend for deeper insights and reporting.
+* **Privacy-friendly:** All sensitive data remains on the device.
+* **Automated Alerts:** Real-time alerts when limits are excedded.
+* **Simple Payments:** Easier USSD transactions with no telecom API dependency.
 
 ---
 
 ## **5. Security Considerations**
 
 * Local data is encrypted and never shared without user consent.
-* Secure authentication (JWT/OAuth2) for cloud sync.
 * SMS and CALL permissions requested transparently.
-* Optional backups use HTTPS for secure transmission.
+* Only SMS from M-Money is ever read or processed.
 
 ---
 
 ## **6. Conclusion**
 
-The MoMo Analysis App architecture provides a hybrid system combining **local intelligence** and **cloud analytics**. It allows users to monitor spending, receive smart alerts, and make direct USSD payments securely — all while maintaining control over their financial data.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The MoMo Analysis App architecture provides a local system that allows users to monitor spending, receive smart alerts, and make faster USSD payments securely — all while maintaining control over their financial data.
