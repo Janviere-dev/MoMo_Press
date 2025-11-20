@@ -9,8 +9,12 @@ This app will analyze MoMo messages to give users clear financial insights and o
 5. David Ngarambe
 6. Timothee Uwayesu
 
-# MoMo_Press App Setup
+# MoMo_Press App Download/Setup
 
+## Download
+You can directly download and install the apk file for the app on your android device from /apk/app-release.apk.
+
+## Setup
 ## 1. Clone the repository
 
 ```bash
