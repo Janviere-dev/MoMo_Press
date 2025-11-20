@@ -1,10 +1,22 @@
-let mcCounter = 1;
-let mdCounter = 1;
-let agCounter = 1;
-let bkdCounter = 1;
-let mtnbCounter = 1;
-let utlCounter = 1;
-let otrCounter = 1;
+/**
+ * Simple hash function for generating deterministic IDs from SMS message content.
+ * Same SMS will always produce the same ID, enabling true deduplication.
+ */
+const simpleHash = (str: string): string => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash).toString(16).substring(0, 8);
+};
+
+const generateIdFromMessage = (body: string, date: string | null, prefix: string): string => {
+  const hashInput = `${body}|${date || ''}`;
+  const hash = simpleHash(hashInput);
+  return `${prefix}-${hash}`;
+};
 
 export const parseMomoMessage = (body: string, user_Number: string) => {
 
@@ -15,8 +27,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
         const phone = body.match(/\((\**\d+)\)/)?.[1] || null;
 
-        const id = `M-${mcCounter.toString().padStart(4, '0')}`;
-        mcCounter++;
+        const id = generateIdFromMessage(body, date, 'M');
 
         return {
             table: 'Money_Transfers',
@@ -35,13 +46,12 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
     // --- MONEY TRANSFERS (SENT) ---
     else if (body.includes('*165*')) {
         const name = body.match(/to (\w+\s\w+)/)?.[1] || null;
-        const amount = parseInt(body.match(/of ([\d,]+) RWF/)?.[1]?.replace(/,/g, '') || '0');
+        const amount = parseInt(body.match(/S\*(\d+)\s*RWF/)?.[1] || '0');
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
         const fee = parseInt(body.match(/Fee was:? (\d+) RWF/)?.[1] || '0');
         const phone = body.match(/\((\**\d+)\)/)?.[1] || null;
 
-        const id = `M-${mcCounter.toString().padStart(4, '0')}`;
-        mcCounter++;
+        const id = generateIdFromMessage(body, date, 'M');
 
         return {
             table: 'Money_Transfers',
@@ -66,8 +76,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const fee = parseInt(body.match(/Fee was:? (\d+) RWF/)?.[1] || '0');
         const code = body.match(/to [A-Za-z ]+ (\d+) has been completed/)?.[1] || null;
 
-        const id = `MD-${mdCounter.toString().padStart(4, '0')}`;
-        mdCounter++;
+        const id = generateIdFromMessage(body, date, 'MD');
 
         return {
             table: 'Merchant_Payment',
@@ -90,8 +99,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
         const fee = parseInt(body.match(/Fee paid: (\d+) RWF/)?.[1] || '0');
 
-        const id = `AG-${agCounter.toString().padStart(4, '0')}`;
-        agCounter++;
+        const id = generateIdFromMessage(body, date, 'AG');
 
         return {
             table: 'Agent_Transactions',
@@ -111,8 +119,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const amount = parseInt(body.match(/deposit of (\d+) RWF/)?.[1] || '0');
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
 
-        const id = `BKD-${bkdCounter.toString().padStart(4, '0')}`;
-        bkdCounter++;
+        const id = generateIdFromMessage(body, date, 'BKD');
 
         return {
             table: 'Bank_Transfers',
@@ -134,8 +141,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const fee = parseInt(body.match(/Fee was (\d+) RWF/)?.[1] || '0');
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
 
-        const id = `MTNB-${mtnbCounter.toString().padStart(4, '0')}`;
-        mtnbCounter++;
+        const id = generateIdFromMessage(body, date, 'MTNB');
 
         return {
             table: 'Bundles',
@@ -157,8 +163,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
         const fee = parseInt(body.match(/Fee was (\d+) RWF/)?.[1] || '0');
         const date = body.match(/at (\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2})/)?.[1] || null;
 
-        const id = `UTL-${utlCounter.toString().padStart(4, '0')}`;
-        utlCounter++;
+        const id = generateIdFromMessage(body, date, 'UTL');
 
         return {
             table: 'Utilities',
@@ -183,9 +188,7 @@ export const parseMomoMessage = (body: string, user_Number: string) => {
             amount = parseInt(body.match(/A transaction of (\d+(?:,\d{3})?) RWF/i)?.[1] || '0');
         }
 
-
-    const id = `OTR-${otrCounter.toString().padStart(4, '0')}`;
-    otrCounter++;
+    const id = generateIdFromMessage(body, date, 'OTR');
 
     return {
         table: 'Others',
