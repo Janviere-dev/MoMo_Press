@@ -4,9 +4,14 @@ SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
 export const getDBConnection = async () => {
-  const db = await SQLite.openDatabase({ name: 'momo_app.db', location: 'default' });
-  await db.executeSql('PRAGMA foreign_keys = ON;');
-  return db;
+  try {
+    const db = await SQLite.openDatabase({ name: 'momo_app.db', location: 'default' });
+    await db.executeSql('PRAGMA foreign_keys = ON;');
+    return db;
+  } catch (error) {
+    console.error('Error opening database:', error);
+    throw error;
+  }
 };
 
 export const createTables = async (db: SQLite.SQLiteDatabase) => {
@@ -15,7 +20,8 @@ export const createTables = async (db: SQLite.SQLiteDatabase) => {
     CREATE TABLE IF NOT EXISTS Users (
       Phone_Number TEXT PRIMARY KEY,
       Name TEXT,
-      Password TEXT NOT NULL
+      Password TEXT NOT NULL,
+      Amount REAL DEFAULT 0
     );
   `);
 
@@ -29,7 +35,6 @@ export const createTables = async (db: SQLite.SQLiteDatabase) => {
       Amount REAL NOT NULL,
       Transaction_Type TEXT CHECK(Transaction_Type IN ('received','sent')) NOT NULL,
       Fee REAL DEFAULT 0,
-      Message TEXT,
       Date DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY(Phone_Number) REFERENCES Users(Phone_Number) ON DELETE CASCADE
     );
@@ -44,7 +49,6 @@ export const createTables = async (db: SQLite.SQLiteDatabase) => {
       Recipient_Code TEXT,
       Amount REAL NOT NULL,
       Fee REAL DEFAULT 0,
-      Message TEXT,
       Date DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY(Phone_Number) REFERENCES Users(Phone_Number) ON DELETE CASCADE
     );
@@ -95,21 +99,13 @@ export const createTables = async (db: SQLite.SQLiteDatabase) => {
       Settings_Id TEXT PRIMARY KEY,
       Phone_Number TEXT NOT NULL UNIQUE,
       Theme TEXT CHECK(Theme IN ('Light','Dark')) DEFAULT 'Light',
-      General_Spending REAL DEFAULT 0,
       General_Spending_Limit REAL DEFAULT 0,
-      Money_Transfer REAL DEFAULT 0,
       Money_Transfer_Limit REAL DEFAULT 0,
-      Bundles REAL DEFAULT 0,
       Bundles_Limit REAL DEFAULT 0,
-      Merchant REAL DEFAULT 0,
       Merchant_Limit REAL DEFAULT 0,
-      Bank REAL DEFAULT 0,
       Bank_Transfer_Limit REAL DEFAULT 0,
-      Utilities REAL DEFAULT 0,
       Utilities_Limit REAL DEFAULT 0,
-      Agent REAL DEFAULT 0,
       Agent_Limit REAL DEFAULT 0,
-      Other REAL DEFAULT 0,
       Others_Limit REAL DEFAULT 0,
       FOREIGN KEY(Phone_Number) REFERENCES Users(Phone_Number) ON DELETE CASCADE
     );
