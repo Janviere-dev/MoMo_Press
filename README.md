@@ -61,7 +61,10 @@ cd android
 > The generated APK will be located at:
 > `android/app/build/outputs/apk/release/app-release.apk`
 
-## 6. Troubleshooting & Notes
+## 6. Demo Video
+[Demo Video](https://youtu.be/teip-LLfCA4) showcasing key functionalities and UI walk-through.
+
+## 7. Troubleshooting & Notes
 
 * **Windows long path issues**: Move your project closer to root (e.g., `C:/Projects/MoMo_Press`) to avoid path length errors.
 * **Gradle issues**: Run `./gradlew clean` and rebuild if you encounter build errors.
